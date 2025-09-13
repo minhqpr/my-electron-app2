@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Show loading state
       submitBtn.disabled = true
       submitBtn.textContent = 'Connecting...'
-      submitBtn.style.backgroundColor = '#6c757d'
+      submitBtn.classList.add('loading')
       hideElement(responseContainer)
       showElement(loadingIndicator)
       
@@ -88,8 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Update response display
         responseElement.textContent = data
-        responseElement.style.borderLeftColor = '#28a745'
-        responseElement.style.backgroundColor = '#d4edda'
+        responseElement.classList.add('success')
         
         // Update details
         responseDetails.innerHTML = `
@@ -108,8 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         // Handle HTTP error
         responseElement.textContent = `HTTP Error: ${response.status} ${response.statusText}`
-        responseElement.style.borderLeftColor = '#dc3545'
-        responseElement.style.backgroundColor = '#f8d7da'
+        responseElement.classList.add('error')
         
         responseDetails.innerHTML = `
           <strong>Status:</strong> ${response.status} ${response.statusText} | 
@@ -127,8 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
       
       // Handle network/connection errors
       responseElement.textContent = `Connection Error: ${error.message}`
-      responseElement.style.borderLeftColor = '#dc3545'
-      responseElement.style.backgroundColor = '#f8d7da'
+      responseElement.classList.add('error')
       
       responseDetails.innerHTML = `
         <strong>Error Type:</strong> ${error.name} | 
@@ -143,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Reset button state
       submitBtn.disabled = false
       submitBtn.textContent = 'Submit Request'
-      submitBtn.style.backgroundColor = '#007acc'
+      submitBtn.classList.remove('loading')
       hideElement(loadingIndicator)
     }
   }
@@ -152,37 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
   submitBtn.addEventListener('click', callLocalServer)
   console.log('Event listener added to submit button')
 
-  // Add hover effects
-  submitBtn.addEventListener('mouseenter', () => {
-    if (!submitBtn.disabled) {
-      submitBtn.style.backgroundColor = '#0056b3'
-      submitBtn.style.transform = 'translateY(-1px)'
-      submitBtn.style.boxShadow = '0 4px 8px rgba(0,0,0,0.15)'
-    }
-  })
-
-  submitBtn.addEventListener('mouseleave', () => {
-    if (!submitBtn.disabled) {
-      submitBtn.style.backgroundColor = '#007acc'
-      submitBtn.style.transform = 'translateY(0)'
-      submitBtn.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)'
-    }
-  })
-
-  // Add click effect
-  submitBtn.addEventListener('mousedown', () => {
-    if (!submitBtn.disabled) {
-      submitBtn.style.transform = 'translateY(1px)'
-      submitBtn.style.boxShadow = '0 1px 2px rgba(0,0,0,0.1)'
-    }
-  })
-
-  submitBtn.addEventListener('mouseup', () => {
-    if (!submitBtn.disabled) {
-      submitBtn.style.transform = 'translateY(-1px)'
-      submitBtn.style.boxShadow = '0 4px 8px rgba(0,0,0,0.15)'
-    }
-  })
+  // Hover effects are now handled by CSS
 
   console.log('App initialization complete!')
 })
