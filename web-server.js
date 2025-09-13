@@ -17,7 +17,7 @@ let llm = null;
 // Dynamic import and initialization
 async function initializeLLM() {
   try {
-    const { default: LocalLLM } = await import('./LocalLLM.js');
+    const { default: LocalLLM } = await import('./agents/LocalLLM.js');
     llm = new LocalLLM('./models/hf_giladgd_gpt-oss-20b.MXFP4.gguf');
     console.log('LocalLLM instance created, initializing model...');
     
